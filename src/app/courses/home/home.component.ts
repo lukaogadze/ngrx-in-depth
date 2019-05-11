@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Course} from "../model/course";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {CoursesService} from "../services/courses.service";
+import {Course} from '../model/course';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {CoursesService} from '../services/courses.service';
 
 @Component({
     selector: 'home',
@@ -11,11 +11,11 @@ import {CoursesService} from "../services/courses.service";
 })
 export class HomeComponent implements OnInit {
 
-    promoTotal$: Observable<number>;
+    promoTotal$!: Observable<number>;
 
-    beginnerCourses$: Observable<Course[]>;
+    beginnerCourses$!: Observable<Course[]>;
 
-    advancedCourses$: Observable<Course[]>;
+    advancedCourses$!: Observable<Course[]>;
 
     constructor(private coursesService: CoursesService) {
 
@@ -26,11 +26,11 @@ export class HomeComponent implements OnInit {
         const courses$ = this.coursesService.findAllCourses();
 
         this.beginnerCourses$ = courses$.pipe(
-          map(courses => courses.filter(course => course.category === 'BEGINNER') )
+            map(courses => courses.filter(course => course.category === 'BEGINNER'))
         );
 
         this.advancedCourses$ = courses$.pipe(
-            map(courses => courses.filter(course => course.category === 'ADVANCED') )
+            map(courses => courses.filter(course => course.category === 'ADVANCED'))
         );
 
         this.promoTotal$ = courses$.pipe(

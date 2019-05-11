@@ -9,7 +9,7 @@ export const USERS = {
 };
 
 
-export const COURSES = {
+export const COURSES: any = {
     0: {
         id: 0,
         description: "Angular Ngrx Course",

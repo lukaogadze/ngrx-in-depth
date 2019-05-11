@@ -1,11 +1,10 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {MatPaginator, MatTableDataSource} from "@angular/material";
-import {Course} from "../model/course";
-import {CoursesService} from "../services/courses.service";
-import {debounceTime, distinctUntilChanged, startWith, tap, delay} from 'rxjs/operators';
-import {merge, fromEvent} from "rxjs";
-import {LessonsDataSource} from "../services/lessons.datasource";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {MatPaginator} from '@angular/material';
+import {Course} from '../model/course';
+import {CoursesService} from '../services/courses.service';
+import {tap} from 'rxjs/operators';
+import {LessonsDataSource} from '../services/lessons.datasource';
 
 
 @Component({
@@ -15,13 +14,13 @@ import {LessonsDataSource} from "../services/lessons.datasource";
 })
 export class CourseComponent implements OnInit, AfterViewInit {
 
-    course:Course;
+    course!: Course;
 
-    dataSource: LessonsDataSource;
+    dataSource!: LessonsDataSource;
 
-    displayedColumns= ["seqNo", "description", "duration"];
+    displayedColumns = ['seqNo', 'description', 'duration'];
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatPaginator) readonly paginator!: MatPaginator;
 
 
     constructor(private route: ActivatedRoute,
@@ -31,7 +30,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
 
-        this.course = this.route.snapshot.data["course"];
+        this.course = this.route.snapshot.data['course'];
 
         this.dataSource = new LessonsDataSource(this.coursesService);
 
@@ -42,10 +41,10 @@ export class CourseComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
 
         this.paginator.page
-        .pipe(
-            tap(() => this.loadLessonsPage())
-        )
-        .subscribe();
+            .pipe(
+                tap(() => this.loadLessonsPage())
+            )
+            .subscribe();
 
     }
 

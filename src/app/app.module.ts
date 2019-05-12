@@ -7,20 +7,27 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 
 import {
+    MatButtonModule,
     MatListModule,
     MatSidenavModule, MatToolbarModule,
-} from "@angular/material";
+} from '@angular/material';
 import {HttpClientModule} from "@angular/common/http";
 
 import {RouterModule, Routes} from "@angular/router";
 import {AuthModule} from "./auth/auth.module";
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import {AuthGuard} from './auth/auth.guard';
+import {EffectsModule} from '@ngrx/effects';
 
 
 const routes: Routes = [
     {
         path: 'courses',
         loadChildren: './courses/courses.module#CoursesModule',
-        canActivate: [],
+        canActivate: [AuthGuard],
     },
     {
         path: "**",
@@ -43,7 +50,11 @@ const routes: Routes = [
         MatSidenavModule,
         MatListModule,
         MatToolbarModule,
+        MatButtonModule,
         AuthModule.forRoot(),
+        StoreModule.forRoot(reducers, { metaReducers }),
+        EffectsModule.forRoot([]),
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
     ],
     providers: [],
     bootstrap: [AppComponent]

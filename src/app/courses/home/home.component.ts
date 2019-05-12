@@ -17,13 +17,12 @@ export class HomeComponent implements OnInit {
 
     advancedCourses$!: Observable<Course[]>;
 
-    constructor(private coursesService: CoursesService) {
-
+    constructor(private readonly _coursesService: CoursesService) {
     }
 
     ngOnInit() {
 
-        const courses$ = this.coursesService.findAllCourses();
+        const courses$ = this._coursesService.findAllCourses();
 
         this.beginnerCourses$ = courses$.pipe(
             map(courses => courses.filter(course => course.category === 'BEGINNER'))

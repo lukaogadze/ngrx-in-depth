@@ -5,7 +5,7 @@
     "scripts": {
         "ng": "ng",
         "start": "./node_modules/.bin/ng serve  --proxy-config ./proxy.json",
-        "server": "./node_modules/.bin/ts-node --skip-project ./server/server.ts",
+        "server": "./node_modules/.bin/ts-node --project server/tsconfig.json ./server/server.ts",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",

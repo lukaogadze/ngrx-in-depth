@@ -11,7 +11,7 @@ export function authReducer(state = initialState, action: AuthActions): AuthStat
     switch (action.type) {
 
         case AuthActionTypes.Login:
-            return AuthStateMutators.login(state, action);
+            return AuthStateMutators.login(state, action.payload);
 
         case AuthActionTypes.Logout:
             return AuthStateMutators.logout(state);

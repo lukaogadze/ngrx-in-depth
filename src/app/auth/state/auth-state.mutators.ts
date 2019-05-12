@@ -1,13 +1,13 @@
 import {AuthState} from './auth.state';
-import {LoginAction} from './auth.actions';
+import {User} from '../../model/user.model';
 
 export abstract class AuthStateMutators {
 
-    static login(state: AuthState, action: LoginAction): AuthState {
+    static login(state: AuthState, user: User): AuthState {
         return {
             ...state,
             isLoggedIn: true,
-            user: action.payload
+            user: user
         };
     }
 
